@@ -153,8 +153,8 @@ Add these two script (`seed` and `seed:refresh`)  under the `scripts` property i
 #### package.json
 ```json
 "scripts": {
-  "seed": "node dist/src/seeder",
-  "seed:refresh": "node dist/src/seeder --refresh"
+  "seed": "node dist/seeder",
+  "seed:refresh": "node dist/seeder --refresh"
 }
 ```
 
