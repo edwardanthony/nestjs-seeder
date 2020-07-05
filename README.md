@@ -163,7 +163,7 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 #### Run seeders normally
 `npm run seed`
 
-#### Run the seeders and replace the existing data
+#### Run seeders and replace existing data
 `npm run seed:refresh`
 
 ## 📜 License
