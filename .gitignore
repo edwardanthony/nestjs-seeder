@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# IDE
+/.vscode
+
+# misc
+npm-debug.log
+.DS_Store
+
+# dist
+/dist
