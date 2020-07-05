@@ -79,7 +79,7 @@ age: number;
 
 ### 2. Define seeder
 
-A seeder is a class that implements `Seeder` interface. It requires you to implements two methods:
+A seeder is a class that implements `Seeder` interface. It requires you to implement two methods:
 
 * `async seed(): Promise<any>`
 * `async drop(): Promise<any>`
@@ -119,8 +119,6 @@ export class UsersSeeder implements Seeder {
 
 Create a seeder file under `src` folder in your NestJS project and name it `seeder.ts`.
 
-Or you can use this command, `touch src/seeder.ts`.
-
 #### src/seeder.ts
 ```typescript
 import { seeder } from 'nestjs-seeder';
@@ -135,12 +133,12 @@ seeder({
   ],
 }).run([UsersSeeder]);
 ```
-Notice that `seeder` function accepts NestJS `@Module()` decorator metadata such as `imports`, `providers`.
+Notice that `seeder` function accepts NestJS `@Module()` decorator metadata such as `imports` and `providers`.
 This will allow you to use NestJS dependency injection and later inject it in your seeder file.
 
 Finally, we call `run` method and pass any number of seeders that you want to run. In this case we want to run `UsersSeeder`.
 
-If you have want to run multiple seeders, you could do:
+If you want to run multiple seeders, you could do:
 
 ```typescript
 .run([UsersSeeder, ProductsSeeder])
@@ -148,7 +146,7 @@ If you have want to run multiple seeders, you could do:
 
 ### 4. Integrate your seeder into command line
 
-Add these two script (`seed` and `seed:refresh`)  under the `scripts` property in your `package.json` file:
+Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
 
 #### package.json
 ```json
@@ -158,9 +156,9 @@ Add these two script (`seed` and `seed:refresh`)  under the `scripts` property i
 }
 ```
 
-**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refreh` after your existing scripts.
+**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refreh` scripts after your existing scripts.
 
-With the scripts integrated in the `package.json` file, now we could run 2 different kind of commands:
+With the scripts integrated in the `package.json` file, now you could run 2 different commands:
 
 #### Run seeders normally
 `npm run seed`
