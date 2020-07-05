@@ -16,7 +16,7 @@ An extension library for NestJS to perform seeding.
    <img src="https://s3.amazonaws.com/assets.coveralls.io/badges/coveralls_95.svg" alt="Coverage" /></a>
    <a href="https://github.com/edwardanthony/nestjs-seeder"><img src="https://img.shields.io/badge/Github%20Page-nestjs.seeder-yellow?style=flat-square&logo=github" /></a>
    <a href="https://github.com/edwardanthony"><img src="https://img.shields.io/badge/Author-Edward%20Anthony-blueviolet?style=flat-square&logo=appveyor" /></a>
-   <a href="https://twitter.com/edwardanthony" target="_blank">
+   <a href="https://twitter.com/edward_anthony8" target="_blank">
    <img src="https://img.shields.io/twitter/follow/edward_anthony8.svg?style=social&label=Follow"></a>
 </p>
 
