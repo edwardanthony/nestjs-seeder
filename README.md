@@ -22,7 +22,7 @@ An extension library for NestJS to perform seeding.
 
 
 
-### This library does not depend on the type of database that you use
+### This library does not depend on the database type that you use
 
 ## How to use
 
@@ -62,7 +62,7 @@ gender: string;
 ```
 
 #### Faker Generated Value
-```
+```typescript
 @Factory(faker => faker.address.streetAddress())
 address: string;
 ```
@@ -153,14 +153,14 @@ Add these two script (`seed` and `seed:refresh`)  under the `scripts` property i
 #### package.json
 ```json
 "scripts": {
-.
-.
-	"seed": "node dist/src/seeder",
-    "seed:refresh": "node dist/src/seeder --refresh"
+  "seed": "node dist/src/seeder",
+  "seed:refresh": "node dist/src/seeder --refresh"
 }
 ```
 
-With the scripts integrated in the `package.json` file, now we could run 2 different kind of commands.
+**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refreh` after your existing scripts.
+
+With the scripts integrated in the `package.json` file, now we could run 2 different kind of commands:
 
 #### Run seeders normally
 `npm run seed`
