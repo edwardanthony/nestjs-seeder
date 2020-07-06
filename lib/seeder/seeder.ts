@@ -22,12 +22,12 @@ export interface SeederRunner {
 
 async function bootstrap(options: SeederModuleOptions) {
   const app = await NestFactory.createApplicationContext(
-    SeederModule.register(options),
+    SeederModule.register(options)
   );
   const seedersService = app.get(SeederService);
   await seedersService.run();
 
-  app.close();
+  await app.close();
 }
 
 export const seeder = (options: SeederOptions): SeederRunner => {
