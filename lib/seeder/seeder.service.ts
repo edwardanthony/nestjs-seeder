@@ -15,7 +15,7 @@ export class SeederService {
 
   async seed(): Promise<any> {
     // Don't use `Promise.all` during insertion.
-    // `Promise.all` will run all promises in parallel which is not we want.
+    // `Promise.all` will run all promises in parallel which is not what we want.
     for (const seeder of this.seeders) {
       await seeder.seed();
       console.log(`${seeder.constructor.name} completed`);
