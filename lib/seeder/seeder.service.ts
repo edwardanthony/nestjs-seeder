@@ -20,7 +20,6 @@ export class SeederService {
       await seeder.seed();
       console.log(`${seeder.constructor.name} completed`);
     }
-    return Promise.all(this.seeders.map(s => s.seed()));
   }
 
   async drop(): Promise<any> {
