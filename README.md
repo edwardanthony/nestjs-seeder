@@ -21,7 +21,6 @@ An extension library for NestJS to perform seeding.
 </p>
 
 
-
 ### This library does not depend on the database type that you use
 
 ## How to use
@@ -72,12 +71,12 @@ address: string;
 @Factory(() => {
   const minAge = 18;
   const maxAge = 30;
-  return Math.random() * (maxAge - minAge) + minAge;
+  return Math.round(Math.random() * (maxAge - minAge) + minAge);
 })
 age: number;
 ```
 
-### 2. Define seeder
+### 3. Define seeder
 
 A seeder is a class that implements `Seeder` interface. It requires you to implement two methods:
 
@@ -115,7 +114,7 @@ export class UsersSeeder implements Seeder {
 }
 ```
 
-### 3. Register the seeder
+### 4. Register the seeder
 
 Create a seeder file under `src` folder in your NestJS project and name it `seeder.ts`.
 
@@ -144,7 +143,7 @@ If you want to run multiple seeders, you could do:
 .run([UsersSeeder, ProductsSeeder])
 ```
 
-### 4. Integrate your seeder into command line
+### 5. Integrate your seeder into command line
 
 Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
 
