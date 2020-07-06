@@ -21,7 +21,7 @@ export class User extends Document {
   @Factory(() => {
     const minAge = 18;
     const maxAge = 30;
-    return Math.random() * (maxAge - minAge) + minAge;
+    return Math.round(Math.random() * (maxAge - minAge) + minAge);
   })
   @Prop({ required: true })
   age: number;
