@@ -155,7 +155,7 @@ Add these two script (`seed` and `seed:refresh`) under the `scripts` property in
 }
 ```
 
-**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refreh` scripts after your existing scripts.
+**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refresh` scripts after your existing scripts.
 
 With the scripts integrated in the `package.json` file, now you could run 2 different commands:
 
