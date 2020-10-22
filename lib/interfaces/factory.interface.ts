@@ -1,5 +1,5 @@
 import { FactoryValue } from '../decorators/factory.decorator';
 
 export interface Factory {
-  generate(count: number): Record<string, FactoryValue>[];
+  generate<T = void>(count: number, context?: T): Record<string, FactoryValue>[];
 }

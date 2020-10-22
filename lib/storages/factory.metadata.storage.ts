@@ -8,7 +8,7 @@ export class FactoryMetadataStorageHost {
     this.properties.push(metadata);
   }
 
-  getPropertyMetadatasByTarget(target: Type<unknown>): PropertyMetadata[] {
+  getPropertyMetadatasByTarget<T = void>(target: Type<unknown>): PropertyMetadata<T>[] {
     return this.properties.filter(property => property.target === target);
   }
 }
