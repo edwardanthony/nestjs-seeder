@@ -1,4 +1,4 @@
-import { seeder } from 'nestjs-seeder';
+import { seeder } from '../../lib';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from './schemas/user.schema';
 import { UsersSeeder } from './seeders/users.seeder';

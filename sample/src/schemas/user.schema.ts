@@ -1,13 +1,14 @@
 import { Prop, Schema, SchemaFactory, raw } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Factory } from 'nestjs-seeder';
+import { UserSeederContext } from '../seeders/users.seeder';
+import { Factory } from '../../../lib';
 
 @Schema()
 export class User extends Document {
   // @Factory will automatically inject faker to the function you that you pass.
-  @Factory(faker => ({
-    first: faker.name.firstName(),
-    last: faker.name.lastName(),
+  @Factory<UserSeederContext>((faker, ctx) => ({
+    first: faker.name.firstName(ctx.gender),
+    last: faker.name.lastName(ctx.gender),
   }))
   @Prop(
     raw({
@@ -34,6 +35,17 @@ export class User extends Document {
   @Factory(faker => faker.address.streetAddress())
   @Prop({ required: true })
   address: string;
+
+  // You could also access previous values.
+  @Factory((_, ctx) => `${ctx.first} ${ctx.last}, ${ctx.address}`)
+  @Prop({ required: true })
+  fullAddress: string;
+
+  @Factory(
+    (_, ctx) => `${ctx.name.first} ${ctx.name.last}, ${ctx.age} ${ctx.gender}`,
+  )
+  @Prop({ required: true })
+  personInfo: string;
 }
 
 export const userSchema = SchemaFactory.createForClass(User);

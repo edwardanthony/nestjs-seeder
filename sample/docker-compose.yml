@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:4.4
+    container_name: nest-sample-mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment: 
+      MONGO_INITDB_DATABASE: nestjs-seeder-sample
+    volumes:
+      - mongo:/data/db
+
+volumes:
+  mongo:
+    name: nest-sample-db
