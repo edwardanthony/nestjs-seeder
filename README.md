@@ -3,7 +3,7 @@ An extension library for NestJS to perform seeding.
 </p>
 <p align="center" style="max-width: 450px; margin: auto;">
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-   <a href="https://github.com/edwardanthony/nestjs-seeder" title="All Contributors"><img src="https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square" /></a>
+   <a href="https://github.com/edwardanthony/nestjs-seeder" title="All Contributors"><img src="https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square" /></a>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
    <a href="https://github.com/edwardanthony/nestjs-seeder"><img src="https://img.shields.io/spiget/stars/1000?color=brightgreen&label=Star&logo=github" /></a>
    <a href="https://www.npmjs.com/nestjs-seeder" target="_blank">
@@ -20,7 +20,6 @@ An extension library for NestJS to perform seeding.
    <img src="https://img.shields.io/twitter/follow/edward_anthony8.svg?style=social&label=Follow"></a>
 </p>
 
-
 ### This library does not depend on the database type that you use
 
 ## How to use
@@ -33,16 +32,16 @@ An extension library for NestJS to perform seeding.
 
 In this example, we'll use `@nestjs/mongoose` to define our model. But you could use any class that you want. It's not tied to any database type. The only requirement is that you use ES2015 class.
 
-
 #### user.schema.ts
+
 ```typescript
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import { Factory } from 'nestjs-seeder';
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Document } from "mongoose";
+import { Factory } from "nestjs-seeder";
 
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.name.findName())
+  @Factory((faker) => faker.name.findName())
   @Prop()
   name: string;
 }
@@ -55,18 +54,21 @@ Notice that we use `@Factory` decorator to specify the value for this property. 
 `@Factory` decorator supports multiple argument types, for example:
 
 #### Static Value
+
 ```typescript
 @Factory('male')
 gender: string;
 ```
 
 #### Faker Generated Value
+
 ```typescript
 @Factory(faker => faker.address.streetAddress())
 address: string;
 ```
 
 #### Custom Function
+
 ```typescript
 @Factory(() => {
   const minAge = 18;
@@ -80,21 +82,21 @@ age: number;
 
 A seeder is a class that implements `Seeder` interface. It requires you to implement two methods:
 
-* `async seed(): Promise<any>`
-* `async drop(): Promise<any>`
+- `async seed(): Promise<any>`
+- `async drop(): Promise<any>`
 
 Use `seed` method to insert data into the database, and use `drop` method to clear the data in the database (collection / table).
 
 To insert the data into the database, you could use the provided `DataFactory.createForClass` method. Please see the example below:
 
-
 #### users.seeder.ts
+
 ```typescript
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from '../schemas/user.schema';
-import { Seeder, DataFactory } from 'nestjs-seeder';
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
+import { User } from "../schemas/user.schema";
+import { Seeder, DataFactory } from "nestjs-seeder";
 
 @Injectable()
 export class UsersSeeder implements Seeder {
@@ -119,19 +121,21 @@ export class UsersSeeder implements Seeder {
 Create a seeder file under `src` folder in your NestJS project and name it `seeder.ts`.
 
 #### src/seeder.ts
+
 ```typescript
-import { seeder } from 'nestjs-seeder';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User, userSchema } from './schemas/user.schema';
-import { UsersSeeder } from './seeders/users.seeder';
+import { seeder } from "nestjs-seeder";
+import { MongooseModule } from "@nestjs/mongoose";
+import { User, userSchema } from "./schemas/user.schema";
+import { UsersSeeder } from "./seeders/users.seeder";
 
 seeder({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nestjs-seeder-sample'),
+    MongooseModule.forRoot("mongodb://localhost/nestjs-seeder-sample"),
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
   ],
 }).run([UsersSeeder]);
 ```
+
 Notice that `seeder` function accepts NestJS `@Module()` decorator metadata such as `imports` and `providers`.
 This will allow you to use NestJS dependency injection and later inject it in your seeder file.
 
@@ -148,6 +152,7 @@ If you want to run multiple seeders, you could do:
 Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
 
 #### package.json
+
 ```json
 "scripts": {
   "seed": "node dist/seeder",
@@ -160,10 +165,54 @@ Add these two script (`seed` and `seed:refresh`) under the `scripts` property in
 With the scripts integrated in the `package.json` file, now you could run 2 different commands:
 
 #### Run seeders normally
+
 `npm run seed`
 
 #### Run seeders and replace existing data
+
 `npm run seed:refresh`
+
+## Advance Usage
+
+### Access previously generated value
+
+#### user.schema.ts
+
+```typescript
+@Schema()
+export class User extends Document {
+  @Factory((faker) => faker.random.arrayElement(["male", "female"]))
+  @Prop({ required: true })
+  gender: string;
+
+  @Factory((faker, ctx) => faker.name.firstName(ctx.gender === "male" ? 0 : 1))
+  @Prop({ required: true })
+  firstName: string;
+}
+```
+
+### Fill context with predefined values
+
+#### user.schema.ts
+
+```typescript
+const users = DataFactory.createForClass(User).generate(10, {
+  zipCode: "10153",
+});
+```
+
+#### users.seeder.ts
+
+```typescript
+@schema()
+export class User extends Document {
+  // If you pass predefined values to the `generate` function, you will be
+  // able to access it in the context.
+  @Factory((faker, ctx) => `${faker.address.streetAddress()} ${ctx.zipCode}`)
+  @Prop({ required: true })
+  address: string;
+}
+```
 
 ## 📜 License
 
