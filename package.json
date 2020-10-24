@@ -1,6 +1,6 @@
 {
   "name": "nestjs-seeder",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "An extension library for NestJS to perform seeding.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
