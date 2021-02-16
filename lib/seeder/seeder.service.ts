@@ -18,7 +18,7 @@ export class SeederService {
     // `Promise.all` will run all promises in parallel which is not what we want.
     for (const seeder of this.seeders) {
       await seeder.seed();
-      Logger.log(`${seeder.constructor.name} completed`);
+      Logger.log(`${seeder.constructor.name} completed`, this.constructor.name);
     }
   }
 
