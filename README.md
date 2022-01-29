@@ -149,20 +149,21 @@ If you want to run multiple seeders, you could do:
 
 ### 5. Integrate your seeder into command line
 
-Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
+Add these two script (`seed`, `seed:refresh` and `seed:drop`) under the `scripts` property in your `package.json` file:
 
 #### package.json
 
 ```json
 "scripts": {
   "seed": "node dist/seeder",
-  "seed:refresh": "node dist/seeder --refresh"
+  "seed:refresh": "node dist/seeder --refresh",
+  "seed:drop": "node dist/seeder --drop"
 }
 ```
 
-**NOTE:** Don't replace the `scripts`. Add both `seed` and `seed:refresh` scripts after your existing scripts.
+**NOTE:** Don't replace the `scripts`. Add both `seed`, `seed:refresh` and `seed:drop` scripts after your existing scripts.
 
-With the scripts integrated in the `package.json` file, now you could run 2 different commands:
+With the scripts integrated in the `package.json` file, now you could run 3 different commands:
 
 #### Run seeders normally
 
@@ -171,6 +172,10 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 #### Run seeders and replace existing data
 
 `npm run seed:refresh`
+
+#### Remove all existing data
+
+`npm run seed:drop`
 
 ## Advance Usage
 
