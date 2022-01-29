@@ -5,7 +5,8 @@ import { UsersSeeder } from './seeders/users.seeder';
 
 seeder({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/nestjs-seeder-sample'),
+    //MongooseModule.forRoot('mongodb://localhost/nestjs-seeder-sample'),
+    MongooseModule.forRoot('mongodb+srv://twsolutions:twsolutions@cluster0.lgyzc.mongodb.net/nestjs-seeder-sample'),
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
   ],
 }).run([UsersSeeder]);
