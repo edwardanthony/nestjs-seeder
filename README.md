@@ -41,7 +41,7 @@ import { Factory } from "nestjs-seeder";
 
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.name.findName())
+  @Factory(faker => faker.name.fullName())
   @Prop()
   name: string;
 }
@@ -181,11 +181,11 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 ```typescript
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.random.arrayElement(["male", "female"]))
+  @Factory(faker => faker.helpers.arrayElement(['male', 'female']))
   @Prop({ required: true })
   gender: string;
 
-  @Factory((faker, ctx) => faker.name.firstName(ctx.gender === "male" ? 0 : 1))
+  @Factory((faker, ctx) => faker.name.firstName(ctx.gender))
   @Prop({ required: true })
   firstName: string;
 }
