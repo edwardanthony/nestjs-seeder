@@ -31,8 +31,8 @@
     "@faker-js/faker": "^7.5.0"
   },
   "devDependencies": {
-    "@nestjs/common": "^7.6.18",
-    "@nestjs/core": "^7.6.18",
+    "@nestjs/common": "^9.1.4",
+    "@nestjs/core": "^9.1.4",
     "@types/node": "^14.18.31",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
