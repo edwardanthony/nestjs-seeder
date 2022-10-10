@@ -2,19 +2,18 @@ import { Type } from '@nestjs/common';
 import { Factory, PropertyMetadata } from '../interfaces';
 import { FactoryValue } from '../decorators/factory.decorator';
 import { FactoryMetadataStorage } from '../storages/factory.metadata.storage';
-import * as faker from 'faker';
+import { faker } from '@faker-js/faker';
 
 export class DataFactory {
   static createForClass(target: Type<unknown>): Factory {
     if (!target) {
       throw new Error(
-        `Target class "${target}" passed in to the "TemplateFactory#createForClass()" method is "undefined".`,
+        `Target class "${target}" passed in to the "TemplateFactory#createForClass()" method is "undefined".`
       );
     }
 
-    const properties = FactoryMetadataStorage.getPropertyMetadatasByTarget(
-      target,
-    );
+    const properties =
+      FactoryMetadataStorage.getPropertyMetadatasByTarget(target);
 
     return {
       generate: (count: number, values: Record<string, any> = {}): Record<string, FactoryValue>[] => {
@@ -37,7 +36,7 @@ export class DataFactory {
         [p.propertyKey]: ctx[p.propertyKey] = typeof p.arg === 'function' ? p.arg(faker, ctx) : p.arg,
         ...r,
       }),
-      {},
+      {}
     );
   }
 }
