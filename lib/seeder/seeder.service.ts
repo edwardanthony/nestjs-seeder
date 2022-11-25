@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Seeder } from './seeder.interface';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class SeederService {
     // `Promise.all` will run all promises in parallel which is not what we want.
     for (const seeder of this.seeders) {
       await seeder.seed();
-      console.log(`${seeder.constructor.name} completed`);
+      Logger.log(`${seeder.constructor.name} completed`, this.constructor.name);
     }
   }
 
