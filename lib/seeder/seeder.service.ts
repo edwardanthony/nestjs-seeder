@@ -1,16 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { Seeder } from './seeder.interface';
+import { Injectable } from "@nestjs/common";
+import { Seeder } from "./seeder.interface";
 
 @Injectable()
 export class SeederService {
   constructor(private readonly seeders: Seeder[]) {}
 
   async run(): Promise<any> {
-    const promises = this.shouldRefresh()
-      ? [this.drop(), this.seed()]
-      : [this.seed()];
-
-    return Promise.all(promises);
+    if (this.shouldRefresh()) await this.drop();
+    return this.seed();
   }
 
   async seed(): Promise<any> {
@@ -23,11 +20,11 @@ export class SeederService {
   }
 
   async drop(): Promise<any> {
-    return Promise.all(this.seeders.map(s => s.drop()));
+    return Promise.all(this.seeders.map((s) => s.drop()));
   }
 
   shouldRefresh(): boolean {
     const argv = process.argv;
-    return argv.includes('-r') || argv.includes('--refresh');
+    return argv.includes("-r") || argv.includes("--refresh");
   }
 }
