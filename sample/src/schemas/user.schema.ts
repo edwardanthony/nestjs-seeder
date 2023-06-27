@@ -5,14 +5,14 @@ import { Factory } from 'nestjs-seeder';
 @Schema()
 export class User extends Document {
   // @Factory will automatically inject faker to the function that you pass.
-  @Factory(faker => faker.helpers.arrayElement(['male', 'female']))
+  @Factory((faker) => faker.helpers.arrayElement(['male', 'female']))
   @Prop({ required: true })
   gender: string;
 
   // You could get the previously generated value using the passed context.
   @Factory((faker, ctx) => ({
-    first: faker.name.firstName(ctx.gender),
-    last: faker.name.lastName(ctx.gender),
+    first: faker.person.firstName(ctx.gender),
+    last: faker.person.lastName(ctx.gender),
   }))
   @Prop(
     raw({
@@ -38,7 +38,7 @@ export class User extends Document {
 
   // If you pass predefined values to the `generate` function, you will be
   // able to access it in the context.
-  @Factory((faker, ctx) => `${faker.address.streetAddress()} ${ctx.zipCode}`)
+  @Factory((faker, ctx) => `${faker.location.streetAddress()} ${ctx.zipCode}`)
   @Prop({ required: true })
   address: string;
 }

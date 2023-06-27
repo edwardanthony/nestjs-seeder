@@ -1,6 +1,6 @@
 {
   "name": "nestjs-seeder",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "An extension library for NestJS to perform seeding.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   "author": "Edward Anthony <edwardanthony@fastmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@faker-js/faker": "^7.5.0"
+    "@faker-js/faker": "^8.0.0"
   },
   "devDependencies": {
     "@nestjs/common": "^9.4.0",

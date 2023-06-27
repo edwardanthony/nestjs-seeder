@@ -1,13 +1,13 @@
-import { NestFactory } from '@nestjs/core';
-import { SeederModule, SeederModuleOptions } from './seeder.module';
-import { SeederService } from './seeder.service';
-import { Seeder } from './seeder.interface';
+import { NestFactory } from "@nestjs/core";
+import { SeederModule, SeederModuleOptions } from "./seeder.module";
+import { SeederService } from "./seeder.service";
+import { Seeder } from "./seeder.interface";
 import {
   Provider,
   Type,
   DynamicModule,
   ForwardReference,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
 export interface SeederOptions {
   imports?: Array<

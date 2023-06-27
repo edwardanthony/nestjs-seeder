@@ -41,7 +41,7 @@ import { Factory } from "nestjs-seeder";
 
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.name.fullName())
+  @Factory((faker) => faker.person.fullName())
   @Prop()
   name: string;
 }
@@ -63,7 +63,7 @@ gender: string;
 #### Faker Generated Value
 
 ```typescript
-@Factory(faker => faker.address.streetAddress())
+@Factory(faker => faker.location.streetAddress())
 address: string;
 ```
 
@@ -181,11 +181,11 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 ```typescript
 @Schema()
 export class User extends Document {
-  @Factory(faker => faker.helpers.arrayElement(['male', 'female']))
+  @Factory((faker) => faker.helpers.arrayElement(["male", "female"]))
   @Prop({ required: true })
   gender: string;
 
-  @Factory((faker, ctx) => faker.name.firstName(ctx.gender))
+  @Factory((faker, ctx) => faker.person.firstName(ctx.gender))
   @Prop({ required: true })
   firstName: string;
 }
@@ -208,7 +208,7 @@ const users = DataFactory.createForClass(User).generate(10, {
 export class User extends Document {
   // If you pass predefined values to the `generate` function, you will be
   // able to access it in the context.
-  @Factory((faker, ctx) => `${faker.address.streetAddress()} ${ctx.zipCode}`)
+  @Factory((faker, ctx) => `${faker.location.streetAddress()} ${ctx.zipCode}`)
   @Prop({ required: true })
   address: string;
 }
