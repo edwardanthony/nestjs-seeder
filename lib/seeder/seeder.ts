@@ -32,7 +32,7 @@ async function bootstrap(options: SeederModuleOptions) {
 
 export const seeder = (options: SeederOptions): SeederRunner => {
   return {
-    run(seeders: Provider<Seeder>[]): void {
+    async run(seeders: Provider<Seeder>[]): Promise<void> {
       bootstrap({
         ...options,
         seeders,
