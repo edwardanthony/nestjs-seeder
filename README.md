@@ -127,19 +127,23 @@ import { seeder } from "nestjs-seeder";
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, userSchema } from "./schemas/user.schema";
 import { UsersSeeder } from "./seeders/users.seeder";
+import { exit } from "node:process";
 
 seeder({
   imports: [
     MongooseModule.forRoot("mongodb://localhost/nestjs-seeder-sample"),
     MongooseModule.forFeature([{ name: User.name, schema: userSchema }]),
   ],
-}).run([UsersSeeder]);
+}).run([UsersSeeder])
+    .then(exit);
 ```
 
 Notice that `seeder` function accepts NestJS `@Module()` decorator metadata such as `imports` and `providers`.
 This will allow you to use NestJS dependency injection and later inject it in your seeder file.
 
 Finally, we call `run` method and pass any number of seeders that you want to run. In this case we want to run `UsersSeeder`.
+
+And then we exit the process.
 
 If you want to run multiple seeders, you could do:
 
