@@ -181,11 +181,21 @@ With the scripts integrated in the `package.json` file, now you could run 2 diff
 ```typescript
 @Schema()
 export class User extends Document {
+  // Generates a consistent UUID based on the index of the generated data.
+  // Useful during development when you want to have a consistent ID.
+  @Factory((_, __, index) =>
+    uuidv5(index.toString(), '6ba7b810-9dad-11d1-80b4-00c04fd430c8'),
+  )
+  @Prop({ required: true })
+  id: string;
+
   @Factory((faker) => faker.helpers.arrayElement(["male", "female"]))
   @Prop({ required: true })
   gender: string;
 
-  @Factory((faker, ctx) => faker.person.firstName(ctx.gender))
+  // Using the context, you could access the previously generated value.
+  // generates a first name based on the gender.
+  @Factory((faker, ctx, index) => faker.person.firstName(ctx.gender))
   @Prop({ required: true })
   firstName: string;
 }
@@ -208,7 +218,7 @@ const users = DataFactory.createForClass(User).generate(10, {
 export class User extends Document {
   // If you pass predefined values to the `generate` function, you will be
   // able to access it in the context.
-  @Factory((faker, ctx) => `${faker.location.streetAddress()} ${ctx.zipCode}`)
+  @Factory((faker, ctx, index) => `${faker.location.streetAddress()} ${ctx.zipCode}`)
   @Prop({ required: true })
   address: string;
 }
