@@ -149,14 +149,15 @@ If you want to run multiple seeders, you could do:
 
 ### 5. Integrate your seeder into command line
 
-Add these two script (`seed` and `seed:refresh`) under the `scripts` property in your `package.json` file:
+Add these two script (`seed`, `seed:refresh` and `seed:rollback`) under the `scripts` property in your `package.json` file:
 
 #### package.json
 
 ```json
 "scripts": {
   "seed": "node dist/seeder",
-  "seed:refresh": "node dist/seeder --refresh"
+  "seed:refresh": "node dist/seeder --refresh",
+  "seed:rollback": "node dist/seeder --rollback",
 }
 ```
 
