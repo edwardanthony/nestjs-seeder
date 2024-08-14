@@ -6,6 +6,7 @@ export class SeederService {
   constructor(private readonly seeders: Seeder[]) {}
 
   async run(): Promise<any> {
+    if (this.shouldRollback()) return this.drop();
     if (this.shouldRefresh()) await this.drop();
     return this.seed();
   }
@@ -24,7 +25,12 @@ export class SeederService {
   }
 
   shouldRefresh(): boolean {
-    const argv = process.argv;
+    const argv = process.argv;Ï
     return argv.includes("-r") || argv.includes("--refresh");
+  }
+
+  shouldRollback(): boolean {
+      const rollbackArgs = new Set(["-d", "--rollback"]);
+      return process.argv.some(arg => rollbackArgs.has(arg));
   }
 }
