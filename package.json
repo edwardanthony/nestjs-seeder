@@ -28,7 +28,7 @@
   "author": "Edward Anthony <edwardanthony@fastmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "@faker-js/faker": "^8.0.0"
+    "@faker-js/faker": "^9.0.0"
   },
   "devDependencies": {
     "@nestjs/common": "^9.4.0",
